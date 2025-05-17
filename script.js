@@ -1,4 +1,4 @@
-// Select elements
+
 const previousOperandElement = document.getElementById('previous-operand');
 const currentOperandElement = document.getElementById('current-operand');
 const numberButtons = document.querySelectorAll('.number');
@@ -7,19 +7,19 @@ const equalsButton = document.getElementById('equals');
 const clearButton = document.getElementById('clear');
 const deleteButton = document.getElementById('delete');
 
-// Calculator state
+
 let currentOperand = '0';
 let previousOperand = '';
 let operation = undefined;
 let resetScreen = false;
 
-// Initialize the calculator
+
 function initialize() {
     updateDisplay();
     setupEventListeners();
 }
 
-// Update the display
+
 function updateDisplay() {
     currentOperandElement.textContent = currentOperand;
     
@@ -30,7 +30,7 @@ function updateDisplay() {
     }
 }
 
-// Get operation symbol
+
 function getOperationSymbol(op) {
     switch(op) {
         case 'add': return '+';
@@ -41,7 +41,7 @@ function getOperationSymbol(op) {
     }
 }
 
-// Append number to the current operand
+
 function appendNumber(number) {
     if (currentOperand === '0' || resetScreen) {
         currentOperand = number;
@@ -52,7 +52,7 @@ function appendNumber(number) {
     updateDisplay();
 }
 
-// Handle decimal point
+
 function appendDecimal() {
     if (resetScreen) {
         currentOperand = '0.';
@@ -65,7 +65,7 @@ function appendDecimal() {
     updateDisplay();
 }
 
-// Choose operation
+
 function chooseOperation(op) {
     if (currentOperand === '0') return;
     
@@ -79,7 +79,7 @@ function chooseOperation(op) {
     updateDisplay();
 }
 
-// Compute the result
+
 function compute() {
     let computation;
     const prev = parseFloat(previousOperand);
@@ -115,7 +115,7 @@ function compute() {
     updateDisplay();
 }
 
-// Clear the calculator
+
 function clear() {
     currentOperand = '0';
     previousOperand = '';
@@ -123,7 +123,7 @@ function clear() {
     updateDisplay();
 }
 
-// Delete the last digit
+
 function deleteDigit() {
     if (currentOperand.length === 1 || (currentOperand.length === 2 && currentOperand.startsWith('-'))) {
         currentOperand = '0';
@@ -133,9 +133,9 @@ function deleteDigit() {
     updateDisplay();
 }
 
-// Setup event listeners
+
 function setupEventListeners() {
-    // Number buttons
+    
     numberButtons.forEach(button => {
         button.addEventListener('click', () => {
             if (button.id === 'decimal') {
@@ -146,33 +146,33 @@ function setupEventListeners() {
         });
     });
     
-    // Operator buttons
+    
     operatorButtons.forEach(button => {
         button.addEventListener('click', () => {
             chooseOperation(button.id);
         });
     });
     
-    // Equals button
+    
     equalsButton.addEventListener('click', () => {
         compute();
     });
     
-    // Clear button
+    
     clearButton.addEventListener('click', () => {
         clear();
     });
     
-    // Delete button
+    
     deleteButton.addEventListener('click', () => {
         deleteDigit();
     });
     
-    // Keyboard support
+    
     document.addEventListener('keydown', handleKeyboard);
 }
 
-// Handle keyboard input
+
 function handleKeyboard(e) {
     if (e.key >= '0' && e.key <= '9') {
         appendNumber(e.key);
@@ -205,5 +205,5 @@ function handleKeyboard(e) {
     }
 }
 
-// Initialize when the document is loaded
+
 document.addEventListener('DOMContentLoaded', initialize);
